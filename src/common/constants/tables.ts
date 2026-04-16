@@ -1,0 +1,4 @@
+export enum TABLE_NAMES {
+  VEHICLES = 'VEHICLES',
+  BOOKINGS = 'BOOKINGS',
+}
