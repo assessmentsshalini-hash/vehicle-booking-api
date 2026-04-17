@@ -52,4 +52,6 @@ Swagger will be available at docs at `http://localhost:3000/api`
 
 ### 4. Deployed API URL
 
+- https://vehicle-booking.up.railway.app/api
+
 ---

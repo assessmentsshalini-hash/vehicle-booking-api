@@ -1,5 +1,4 @@
 import * as dotenv from 'dotenv';
-import { join } from 'node:path';
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
@@ -13,8 +12,8 @@ export const AppDataSource = new DataSource({
       ? { rejectUnauthorized: false }
       : false,
 
-  entities: [join(__dirname, 'src/**/*.entity.ts')],
-  migrations: [join(__dirname, 'src/migrations/*.ts')],
+  entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
+  migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
   namingStrategy: new SnakeNamingStrategy(),
   synchronize: false,
   logging: true,
