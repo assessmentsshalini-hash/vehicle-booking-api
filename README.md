@@ -41,6 +41,12 @@ Open `.env` and update the values. The defaults in `.env.example` work out of th
 
 ### 3. Run locally
 
+Run migrations first
+
+```bash
+npm run migration:run
+```
+
 Start the development server:
 
 ```bash
