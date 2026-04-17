@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
       : false,
 
   entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
-  migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
+  migrations: [__dirname + '/../migrations/*{.ts,.js}'],
   namingStrategy: new SnakeNamingStrategy(),
   synchronize: false,
   logging: true,
