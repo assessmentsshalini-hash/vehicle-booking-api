@@ -61,7 +61,6 @@ export class BookingService {
       pickupDateTime: LessThan(returnTime),
       returnDateTime: MoreThan(pickupTime),
     });
-    console.log(overlappingBooking);
 
     if (overlappingBooking) {
       throw new ConflictException(RESPONSE_MESSAGES.BOOKING_OVERLAP);
