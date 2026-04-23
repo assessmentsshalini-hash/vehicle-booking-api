@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -13,7 +12,6 @@ import { PaginatedResponse } from 'src/common/services/response.service';
 import { VEHICLE_STATUS } from 'src/vehicles/constants/vehicle';
 import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
 import { VehicleService } from 'src/vehicles/services/vehicle.service';
-import { LessThan, MoreThan } from 'typeorm';
 
 @Injectable()
 export class BookingService {
@@ -56,15 +54,15 @@ export class BookingService {
 
     //check overlaps
 
-    const overlappingBooking = await this.bookingDatabaseService.findOneRecord({
-      vehicleId: request.vehicleId,
-      pickupDateTime: LessThan(returnTime),
-      returnDateTime: MoreThan(pickupTime),
-    });
+    // const overlappingBooking = await this.bookingDatabaseService.findOneRecord({
+    //   vehicleId: request.vehicleId,
+    //   pickupDateTime: LessThan(returnTime),
+    //   returnDateTime: MoreThan(pickupTime),
+    // });
 
-    if (overlappingBooking) {
-      throw new ConflictException(RESPONSE_MESSAGES.BOOKING_OVERLAP);
-    }
+    // if (overlappingBooking) {
+    //   throw new ConflictException(RESPONSE_MESSAGES.BOOKING_OVERLAP);
+    // }
 
     //calculate the total price
     const totalPrice = this.calculatePrice(
@@ -74,7 +72,7 @@ export class BookingService {
       request.pricingMode,
     );
 
-    return await this.bookingDatabaseService.createRecord({
+    return await this.bookingDatabaseService.createBooking({
       ...request,
       totalAmount: totalPrice,
     });

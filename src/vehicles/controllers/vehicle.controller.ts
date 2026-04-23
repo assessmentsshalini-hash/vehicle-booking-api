@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -41,6 +42,7 @@ export class VehiclesController {
 
   @ApiOperation({ summary: 'Create a vehicle' })
   @ApiSingleResponse(VehicleResponseDTO)
+  @HttpCode(201)
   @Post()
   async createVehicle(@Body() requestBody: VehicleRequestDTO) {
     const user = await this.vehiclesService.createVehicle(requestBody);

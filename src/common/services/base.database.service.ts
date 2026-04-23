@@ -9,13 +9,24 @@ import {
   FindOneOptions,
   FindOptionsWhere,
   Repository,
+  type DataSource,
+  type EntityManager,
 } from 'typeorm';
 
 import { BaseEntity } from 'src/common/entities/base-entity.entity';
 import { PaginatedResponse } from 'src/common/services/response.service';
 
 export abstract class BaseDatabaseService<T extends BaseEntity> {
-  constructor(protected readonly repository: Repository<T>) {}
+  constructor(
+    protected readonly repository: Repository<T>,
+    protected readonly dataSource: DataSource,
+  ) {}
+
+  async runInTransaction<R>(
+    work: (manager: EntityManager) => Promise<R>,
+  ): Promise<R> {
+    return this.dataSource.transaction(work);
+  }
 
   /**
    * Create a new record with audit fields

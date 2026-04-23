@@ -15,12 +15,12 @@ export class ResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     return next.handle().pipe(
       map((data) => {
-        const [res] = context.getArgs();
+        const res = context.switchToHttp().getResponse();
 
         const { statusCode, message, ...rest } = data || {};
 
         return {
-          statusCode: statusCode || res.statusCode || 200,
+          statusCode: statusCode ?? res.statusCode ?? 200,
           success: true,
           message: message || 'SUCCESS',
           ...(rest || {}),

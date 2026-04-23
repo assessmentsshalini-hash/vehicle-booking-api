@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import {
   BookingRequestDTO,
@@ -32,6 +40,7 @@ export class BookingsController {
 
   @ApiOperation({ summary: 'Create a booking' })
   @ApiSingleResponse(BookingResponseDTO)
+  @HttpCode(201)
   @Post()
   async createBooking(@Body() requestBody: BookingRequestDTO) {
     const user = await this.bookingService.createBooking(requestBody);
